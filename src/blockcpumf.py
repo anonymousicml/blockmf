@@ -21,7 +21,7 @@ def error(R, P , Q, u1, u2, v1, v2):
     error = np.sum(Rc)/(P.shape[0]*Q.shape[1])
     return np.sqrt(error)
 
-def block_factorization(P, Q, R, u1, u2, v1, v2, K=10, steps=4, alpha=0.0001, beta=0.01):
+def block_factorization(P, Q, R, u1, u2, v1, v2, K=10, steps=1, alpha=0.000001, beta=0.01):
     
     t0 = time.clock()
     steps = int(steps/1)
@@ -70,7 +70,7 @@ def block_factorization(P, Q, R, u1, u2, v1, v2, K=10, steps=4, alpha=0.0001, be
 
     return P, Q
 
-def factorize(users, movies, ratings, test_users, test_movies, test_ratings, blocks=1, latent=10, steps=10, gpu_steps=2, alpha=0.00001, beta=0.01, delta=0.01, rmse_repeat_count=3, debug=2, dataset=''):
+def factorize(users, movies, ratings, test_users, test_movies, test_ratings, blocks=1, latent=10, steps=10, gpu_steps=1, alpha=0.000001, beta=0.01, delta=0.01, rmse_repeat_count=3, debug=2, dataset=''):
 
     U, V = np.ones((R.shape[0], latent)), np.ones((latent, R.shape[1]))
     size = max(np.max(users)+1, np.max(movies)+1)
@@ -127,7 +127,7 @@ def factorize(users, movies, ratings, test_users, test_movies, test_ratings, blo
                     print("Length of uu,mm ", len(uu), len(mm), u2-u1+1, v2-v1+1, P.shape, Q.shape)
 
                 if(len(uu)!=0 and len(mm)!=0):
-                    P,Q = block_factorization(P,Q,R, u1, u2, v1, v2, steps=gpu_steps-k)
+                    P,Q = block_factorization(P,Q,R, u1, u2, v1, v2, steps=gpu_steps)
                     t8 = time.clock()
 
                     if debug>1:
