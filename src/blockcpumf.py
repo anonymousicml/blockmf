@@ -171,10 +171,10 @@ def factorize(users, movies, ratings, test_users, test_movies, test_ratings, blo
     np.savetxt(str(blocks*blocks)+'blocks_'+str(gpu_steps)+'iterations_y2.txt', y2, fmt='%.3f')
     np.savetxt(str(blocks*blocks)+'blocks_'+str(gpu_steps)+'iterations_y1.txt', y1, fmt='%.3f')
 
-# test, train dataset is temporarily hardcoded to point to R.txt 
+# test, train dataset is temporarily hardcoded to point to a dense matrix: ../data/R.txt 
 # just pass dummy arguments for arg1, arg2 
 
-R = np.loadtxt('../R.txt')
+R = np.loadtxt('../data/R.txt')
 users = []
 movies = []
 ratings = []
